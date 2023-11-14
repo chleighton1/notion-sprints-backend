@@ -76,10 +76,6 @@ setInterval(async () => {
   }
 }, 1000 * 60 * 10);
 
-app.get("/", (req, res) => {
-  res.render("index", { sprintDB });
-});
-
 app.get("/getData", async (req, res) => {
   try {
     const ev_completed = await getEstimationComplete(sprintDB);

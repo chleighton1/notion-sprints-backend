@@ -185,7 +185,6 @@ async function getEstimationComplete(sprintDB) {
 
   Object.values(sprintDB).forEach(function (item) {
     const posEV = +item.estimates;
-    totalEV += posEV;
 
     progressStatus = item.status;
     trackStatus = item.trackStatus;
@@ -197,6 +196,9 @@ async function getEstimationComplete(sprintDB) {
     ) {
       EV += posEV;
       // console.log(posEV);
+    }
+    if (!progressStatus.includes("Blocked")) {
+      totalEV += posEV;
     }
   });
   return Math.round((EV / totalEV) * 100);

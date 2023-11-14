@@ -190,17 +190,13 @@ async function getEstimationComplete(sprintDB) {
     progressStatus = item.status;
     trackStatus = item.trackStatus;
 
-    if (progressStatus === "Done" || progressStatus === "Q/A") {
+    if (
+      progressStatus === "Done" ||
+      progressStatus === "Q/A" ||
+      progressStatus === "In Review"
+    ) {
       EV += posEV;
       // console.log(posEV);
-    } else if (progressStatus === "In progress") {
-      if (trackStatus === "On-Track") {
-        EV += posEV / 2.0;
-        //   console.log(posEV / 2.0);
-      } else if (trackStatus === "Off-Track") {
-        EV -= posEV / 2.0;
-        //   console.log(-posEV / 2.0);
-      }
     }
   });
   return Math.round((EV / totalEV) * 100);

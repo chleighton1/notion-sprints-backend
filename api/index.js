@@ -16,6 +16,7 @@ const {
 } = require("../controllers/notionController");
 
 const app = express();
+
 app.use(cors());
 
 let sprintDB = [];
@@ -78,6 +79,11 @@ setInterval(async () => {
 
 app.get("/getData", async (req, res) => {
   try {
+    sprintDB = await getCurrentSprintDB(TASK_DB_ID, SPRINT_DB_ID);
+    currentSprint = await getCurrentSprint(SPRINT_DB_ID);
+    notionEstimates = await getNotionEstimates(ESTIMATES_DB_ID);
+    sprintName = currentSprint.properties["Sprint name"].title[0].plain_text;
+
     const ev_completed = await getEstimationComplete(sprintDB);
     res.json({ sprintDB, currentSprint, ev_completed, notionEstimates });
   } catch (error) {

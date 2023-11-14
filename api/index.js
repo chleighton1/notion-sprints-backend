@@ -106,3 +106,5 @@ app.post("/updateData", async (req, res) => {
     console.error("Error receiving the data:", error);
   }
 });
+
+module.exports = app;

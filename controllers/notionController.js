@@ -191,9 +191,9 @@ async function getEstimationComplete(sprintDB) {
     trackStatus = item.trackStatus;
 
     if (
-      progressStatus === "Done" ||
-      progressStatus === "Q/A" ||
-      progressStatus === "In Review"
+      progressStatus.includes("Done") ||
+      progressStatus.includes("Q/A") ||
+      progressStatus.includes("In Review")
     ) {
       EV += posEV;
       // console.log(posEV);

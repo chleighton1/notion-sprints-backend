@@ -91,6 +91,37 @@ app.get("/getData", async (req, res) => {
   }
 });
 
+app.get("/getRealplyData", async (req, res) => {
+  try {
+    sprintDB = await getCurrentSprintDB(taskIDMap.realply, sprintDBMap.realply);
+    currentSprint = await getCurrentSprint(sprintDBMap.realply);
+    notionEstimates = await getNotionEstimates(estimatesIDMap.realply);
+    sprintName = currentSprint.properties["Sprint name"].title[0].plain_text;
+
+    const ev_completed = await getEstimationComplete(sprintDB);
+    res.json({ sprintDB, currentSprint, ev_completed, notionEstimates });
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred" });
+  }
+});
+
+app.get("/getSocialPRData", async (req, res) => {
+  try {
+    sprintDB = await getCurrentSprintDB(
+      taskIDMap.socialpr,
+      sprintDBMap.socialpr
+    );
+    currentSprint = await getCurrentSprint(sprintDBMap.socialpr);
+    notionEstimates = await getNotionEstimates(estimatesIDMap.socialpr);
+    sprintName = currentSprint.properties["Sprint name"].title[0].plain_text;
+
+    const ev_completed = await getEstimationComplete(sprintDB);
+    res.json({ sprintDB, currentSprint, ev_completed, notionEstimates });
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred" });
+  }
+});
+
 app.post("/updateData", async (req, res) => {
   const value = req.body.value;
 

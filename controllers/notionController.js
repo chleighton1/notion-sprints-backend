@@ -179,29 +179,26 @@ async function getCurrentSprint(SPRINT_DB_ID) {
   return currentSprint;
 }
 
-async function getEstimationComplete(sprintDB) {
-  let EV = 0.0;
-  let totalEV = 0.0;
+async function getTasksComplete(sprintDB) {
+  let tasksComplete = 0;
+  let totalTasks = 0;
 
   Object.values(sprintDB).forEach(function (item) {
-    const posEV = +item.estimates;
-
     progressStatus = item.status;
-    trackStatus = item.trackStatus;
 
     if (
       progressStatus.includes("Done") ||
       progressStatus.includes("Q/A") ||
       progressStatus.includes("In Review")
     ) {
-      EV += posEV;
+      tasksComplete += 1;
       // console.log(posEV);
     }
     if (!progressStatus.includes("Blocked")) {
-      totalEV += posEV;
+      totalTasks += 1;
     }
   });
-  return Math.round((EV / totalEV) * 100);
+  return Math.round((tasksComplete / totalTasks) * 100);
 }
 
 module.exports = {

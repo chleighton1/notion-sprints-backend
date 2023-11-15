@@ -10,7 +10,7 @@ const {
 const {
   getCurrentSprint,
   getCurrentSprintDB,
-  getEstimationComplete,
+  getTasksComplete,
   getNotionEstimates,
   updateEstimates,
 } = require("../controllers/notionController");
@@ -84,8 +84,8 @@ app.get("/getData", async (req, res) => {
     notionEstimates = await getNotionEstimates(ESTIMATES_DB_ID);
     sprintName = currentSprint.properties["Sprint name"].title[0].plain_text;
 
-    const ev_completed = await getEstimationComplete(sprintDB);
-    res.json({ sprintDB, currentSprint, ev_completed, notionEstimates });
+    const tasks_completed = await getTasksComplete(sprintDB);
+    res.json({ sprintDB, currentSprint, tasks_completed, notionEstimates });
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });
   }
@@ -98,8 +98,8 @@ app.get("/getRealplyData", async (req, res) => {
     notionEstimates = await getNotionEstimates(estimatesIDMap.realply);
     sprintName = currentSprint.properties["Sprint name"].title[0].plain_text;
 
-    const ev_completed = await getEstimationComplete(sprintDB);
-    res.json({ sprintDB, currentSprint, ev_completed, notionEstimates });
+    const tasks_completed = await getTasksComplete(sprintDB);
+    res.json({ sprintDB, currentSprint, tasks_completed, notionEstimates });
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });
   }
@@ -115,8 +115,8 @@ app.get("/getSocialPRData", async (req, res) => {
     notionEstimates = await getNotionEstimates(estimatesIDMap.socialpr);
     sprintName = currentSprint.properties["Sprint name"].title[0].plain_text;
 
-    const ev_completed = await getEstimationComplete(sprintDB);
-    res.json({ sprintDB, currentSprint, ev_completed, notionEstimates });
+    const tasks_completed = await getTasksComplete(sprintDB);
+    res.json({ sprintDB, currentSprint, tasks_completed, notionEstimates });
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });
   }

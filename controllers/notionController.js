@@ -205,7 +205,7 @@ module.exports = {
   getCurrentSprint,
   getCurrentSprintDB,
   fromNotionObject,
-  getEstimationComplete,
+  getTasksComplete,
   getNotionEstimates,
   addEstimateToNotion,
   updateEstimates,

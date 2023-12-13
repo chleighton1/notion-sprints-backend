@@ -24,9 +24,9 @@ let currentSprint = null;
 let sprintName = "";
 let notionEstimates = [];
 
-let TASK_DB_ID = taskIDMap.realply;
-let SPRINT_DB_ID = sprintDBMap.realply;
-let ESTIMATES_DB_ID = estimatesIDMap.realply;
+let TASK_DB_ID = taskIDMap.team_one;
+let SPRINT_DB_ID = sprintDBMap.team_one;
+let ESTIMATES_DB_ID = estimatesIDMap.team_one;
 
 async function initializeApp(TASK_DB_ID, SPRINT_DB_ID) {
   try {
@@ -91,11 +91,14 @@ app.get("/getData", async (req, res) => {
   }
 });
 
-app.get("/getRealplyData", async (req, res) => {
+app.get("/getTeamOneData", async (req, res) => {
   try {
-    sprintDB = await getCurrentSprintDB(taskIDMap.realply, sprintDBMap.realply);
-    currentSprint = await getCurrentSprint(sprintDBMap.realply);
-    notionEstimates = await getNotionEstimates(estimatesIDMap.realply);
+    sprintDB = await getCurrentSprintDB(
+      taskIDMap.team_one,
+      sprintDBMap.team_one
+    );
+    currentSprint = await getCurrentSprint(sprintDBMap.team_one);
+    notionEstimates = await getNotionEstimates(estimatesIDMap.team_one);
     sprintName = currentSprint.properties["Sprint name"].title[0].plain_text;
 
     const tasks_completed = await getTasksComplete(sprintDB);
@@ -105,14 +108,14 @@ app.get("/getRealplyData", async (req, res) => {
   }
 });
 
-app.get("/getSocialPRData", async (req, res) => {
+app.get("/getTeamTwoData", async (req, res) => {
   try {
     sprintDB = await getCurrentSprintDB(
-      taskIDMap.socialpr,
-      sprintDBMap.socialpr
+      taskIDMap.team_two,
+      sprintDBMap.team_two
     );
-    currentSprint = await getCurrentSprint(sprintDBMap.socialpr);
-    notionEstimates = await getNotionEstimates(estimatesIDMap.socialpr);
+    currentSprint = await getCurrentSprint(sprintDBMap.team_two);
+    notionEstimates = await getNotionEstimates(estimatesIDMap.team_two);
     sprintName = currentSprint.properties["Sprint name"].title[0].plain_text;
 
     const tasks_completed = await getTasksComplete(sprintDB);
